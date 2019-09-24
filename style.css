@@ -42,3 +42,21 @@ body {
     min-width: 640px;
     min-height: 480px;
 }
+
+#content a {
+    text-align: center;
+    width: 20em;
+    border: 1px solid black;
+    margin: 1em;
+    display: block;
+    padding: 1em;
+    text-decoration: none;
+}
+
+#feedback {
+    width: 20em;
+    margin: 1em;
+    padding: 0.2em;
+    min-height: 4em;
+    border: 1px solid black;
+}

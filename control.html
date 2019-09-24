@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="de">
+    <head>
+        <meta charset="utf-8">
+        <title>H&uuml;hnerstall 2.0 Steuerung</title>
+        <link rel="stylesheet" href="style.css"/>
+    </head>
+    <body>
+        <div class="sidenav">
+            <a href="#" id="ctrlLink">Steuerung</a>
+        </div>
+
+        <div id="content">
+            <a href="#" id="doorUp">T&uuml;r &ouml;ffnen</a>
+            <a href="#" id="doorDown">T&uuml;r schlie&szlig;en</a>
+            <a href="#" id="innerLightOn">Licht innen anschalten</a>
+            <a href="#" id="innerLightOff">Licht innen ausschalten</a>
+            <a href="#" id="outerLightOn">Licht au&szlig;en anschalten</a>
+            <a href="#" id="outerLightOff">Licht au&szlig;en ausschalten</a>
+            <div id="feedback"></div>
+        </div>
+
+        <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            $("#feedback").load("info.py");
+            
+            $("#doorUp").on("click", function(){
+                 $("#feedback").load("control.py?action=doorup");
+            });
+
+            $("#doorDown").on("click", function(){
+                 $("#feedback").load("control.py?action=doordown");
+            });
+
+            $("#innerLightOn").on("click", function(){
+                 $("#feedback").load("control.py?action=innerlighton");
+            });
+
+            $("#innerLightOff").on("click", function(){
+                 $("#feedback").load("control.py?action=innerlightoff");
+            });
+
+            $("#outerLightOn").on("click", function(){
+                 $("#feedback").load("control.py?action=outerlighton");
+            });
+
+            $("#outerLightOff").on("click", function(){
+                 $("#feedback").load("control.py?action=outerlightoff");
+            });
+
+        </script>
+    </body>
+</html>

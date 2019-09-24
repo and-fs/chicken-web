@@ -9,6 +9,9 @@
         <div class="sidenav">
             <a href="#" id="infoLink">Info</a>
             <a href="#" id="camLink">WebCam</a>
+            <!--a href="#" id="controllerLogs">Controller-Logs</a>
+            <a href="#" id="displayLogs">Display-Logs</a>
+            <a href="#" id="cameraLogs">Kamera-Logs</a-->
         </div>
 
         <div id="content"></div>
@@ -16,12 +19,37 @@
         <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
         <script type="text/javascript">
             $("#content").load("info.py");
+            
             $("#infoLink").on("click", function(){
                 $("#content").load("info.py");
             });
+
             $("#camLink").on("click", function(){
                 $("#content").html('<img src="' + window.location.origin + ':8000/stream.mjpg" width="640" height="480">');
             });
+
+            // $("#controllerLogs").on("click", function() {
+            //     $.getJSON('logs.py?type=controller')
+            //         .done( function(response) {
+            //             var el = $('#content');
+            //             $.each(response, function(index, rc) {
+            //                 el.append('<div class="' + rc.level + '">' +
+            //                           '<span class="datetime">' + rc.date + ' ' + rc.time + '</span>' +
+            //                           '<span class="level">' + rc.level + '</span>' +
+            //                           '<span class="message">' + rc.message + '</span>' +
+            //                           '</div>')
+            //             });
+            //         })
+            // })
+
+            // $("#displayLogs").on("click", function(){
+            //     $("#content").load("logs.py", "type=display")
+            // })
+
+            // $("#cameraLogs").on("click", function(){
+            //     $("#content").load("logs.py", "type=camera")
+            // })
+
         </script>
     </body>
 </html>

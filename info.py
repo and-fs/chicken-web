@@ -7,6 +7,14 @@ import time
 
 DOOR_OPEN = 4
 
+light_text = [
+    (200, "Dunkel"),
+    (150, "D&auml;mmerung"),
+    (100, "Bew&ouml;lkt"),
+    (0, "Sonnig"),
+]
+
+
 def GetNextActionText(state):
     now = datetime.now()
     for dt, action in state.get("next_actions", []):
@@ -26,23 +34,6 @@ def page():
     except Exception:
         print ('<div class="error">Failed to get board info, control server not available.</div>')
     else:
-        """
-        result = {
-            "temperature": self.GetTemperature(),
-            "indoor_light": self.IsIndoorLightOn(),
-            "outdoor_light": self.IsOutdoorLightOn(),
-            "light_sensor": self.GetLight(),
-        }
-
-        if self.IsDoorMoving():
-            result["door"] = DOOR_MOVING
-        elif self.IsDoorClosed():
-            result["door"] = DOOR_CLOSED
-        elif self.IsDoorOpen():
-            result["door"] = DOOR_OPEN
-        else:
-            result["door"] = DOOR_NOT_MOVING
-            """
         door_states = {
             0: "FEHLER",
             1: "&Ouml;ffnet gerade",
@@ -74,7 +65,7 @@ def page():
         elif autostate == -1:
             autotext = "Dauerhaft deaktiviert"
         else:
-            enable_time = state["automatic_enable"]
+            enable_time = state["automatic_enable_time"]
             autotext = "Deaktiviert bis %s" % (datetime.fromtimestamp(enable_time).strftime("%H:%M"),)
 
         print("  </tr>")
@@ -97,15 +88,22 @@ def page():
         print("    <td>%s</td>" % (light_states[state["outdoor_light"]],))
         print("  </tr>")
 
-        print("  </tr>")
-        print("    <td>Helligkeitssensor</td>")
-        print("    <td>%s</td>" % (state["light_sensor"],))
-        print("  </tr>")
+        light_sensor_text = "Ung&uuml;ltig"
+        light_sensor = state["light_sensor"]
+        for boundary, text in light_text:
+            if light_sensor > boundary:
+                light_sensor_text = text
+                break
 
         print("  </tr>")
-        print("    <td>Temperatursensor</td>")
-        print("    <td>%.2f</td>" % (state["temperature"],))
+        print("    <td>Helligkeitssensor</td>")
+        print("    <td>%s</td>" % (light_sensor_text,))
         print("  </tr>")
+
+        # print("  </tr>")
+        # print("    <td>Temperatursensor</td>")
+        # print("    <td>%.2f</td>" % (state["temperature"],))
+        # print("  </tr>")
 
         print("</table>")
 
